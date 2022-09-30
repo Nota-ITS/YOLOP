@@ -5,6 +5,7 @@ __pycache__/
 .vscode/
 bdd/
 runs/
+/dataset
 *.pth
 *.pt
 *.tar
