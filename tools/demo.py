@@ -39,7 +39,8 @@ transform=transforms.Compose([
 
 
 def detect(cfg,opt):
-
+    print(opt)
+    print(opt.weights)
     logger, _, _ = create_logger(
         cfg, cfg.LOG_DIR, 'demo')
 
@@ -50,6 +51,8 @@ def detect(cfg,opt):
     half = device.type != 'cpu'  # half precision only supported on CUDA
 
     # Load model
+    if type(opt.weights) == list:
+        opt.weights = opt.weights[0]
     model = get_net(cfg)
     checkpoint = torch.load(opt.weights, map_location= device)
     model.load_state_dict(checkpoint['state_dict'])
