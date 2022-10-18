@@ -144,6 +144,7 @@ def main():
     lr_scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lf)
     begin_epoch = cfg.TRAIN.BEGIN_EPOCH
 
+    # perpare logger and determine training part
     if rank in [-1, 0]:
         checkpoint_file = os.path.join(
             os.path.join(cfg.LOG_DIR, cfg.DATASET.DATASET), 'checkpoint.pth'
@@ -252,8 +253,8 @@ def main():
     model.nc = 1
     # print('bulid model finished')
 
-    print("begin to load data")
     # Data loading
+    print("begin to load data")
     normalize = transforms.Normalize(
         mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
     )
@@ -312,7 +313,7 @@ def main():
             logger.info(str(det.anchors))
 
     # training
-    num_warmup = max(round(cfg.TRAIN.WARMUP_EPOCHS * num_batch), 1000)
+    num_warmup = max(round(cfg.TRAIN.WARMUP_EPOCHS * num_batch), 1000)          #1000 의미는 뭘까...
     scaler = amp.GradScaler(enabled=device.type != 'cpu')
     print('=> start training...')
     for epoch in range(begin_epoch+1, cfg.TRAIN.END_EPOCH+1):
@@ -332,7 +333,7 @@ def main():
                 final_output_dir, tb_log_dir, writer_dict,
                 logger, device, rank
             )
-            fi = fitness(np.array(detect_results).reshape(1, -1))  #目标检测评价指标
+            fi = fitness(np.array(detect_results).reshape(1, -1))  # 목표검사 평가지표
 
             msg = 'Epoch: [{0}]    Loss({loss:.3f})\n' \
                       'Driving area Segment: Acc({da_seg_acc:.3f})    IOU ({da_seg_iou:.3f})    mIOU({da_seg_miou:.3f})\n' \

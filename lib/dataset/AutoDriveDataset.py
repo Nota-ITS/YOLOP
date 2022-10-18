@@ -206,7 +206,7 @@ class AutoDriveDataset(Dataset):
             _,seg2 = cv2.threshold(seg_label,1,255,cv2.THRESH_BINARY_INV)
         _,lane1 = cv2.threshold(lane_label,1,255,cv2.THRESH_BINARY)
         _,lane2 = cv2.threshold(lane_label,1,255,cv2.THRESH_BINARY_INV)
-#        _,seg2 = cv2.threshold(seg_label[:,:,2],1,255,cv2.THRESH_BINARY)
+        # _,seg2 = cv2.threshold(seg_label[:,:,2],1,255,cv2.THRESH_BINARY)
         # # seg1[cutout_mask] = 0
         # # seg2[cutout_mask] = 0
         

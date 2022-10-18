@@ -188,7 +188,7 @@ def get_loss(cfg, device):
     # segmentation loss criteria
     BCEseg = nn.BCEWithLogitsLoss(pos_weight=torch.Tensor([cfg.LOSS.SEG_POS_WEIGHT])).to(device)
     # Focal loss
-    gamma = cfg.LOSS.FL_GAMMA  # focal loss gamma
+    gamma = cfg.LOSS.FL_GAMMA  # focal loss gamma for detection part
     if gamma > 0:
         BCEcls, BCEobj = FocalLoss(BCEcls, gamma), FocalLoss(BCEobj, gamma)
 

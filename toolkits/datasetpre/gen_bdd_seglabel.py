@@ -31,6 +31,7 @@ def poly2patch(poly2d, closed=False, alpha=1., color=None):
 
 def get_areas_v0(objects):
     # print(objects['category'])
+    
     return [o for o in objects
             if 'poly2d' in o and o['category'].startswith('area')]
 
@@ -42,14 +43,15 @@ def draw_drivable(objects, ax):
     for obj in objects:
         if obj['category'] == 'area/drivable':
             color = (1, 1, 1)
-        # elif obj['category'] == 'area/alternative':
-        #     color = (0, 1, 0)
+        elif obj['category'] == 'area/alternative':
+            color = (0, 1, 0)
         else:
             if obj['category'] != 'area/alternative':
                 print(obj['category'])
             color = (0, 0, 0)
-        # alpha = 0.5
-        alpha = 1.0
+        
+        alpha = 0.5
+        
         poly2d = obj['poly2d']
         ax.add_patch(poly2patch(
                 poly2d, closed=True,
@@ -66,9 +68,13 @@ def filter_pic(data):
     return False
 
 def main(mode="train"):
-    image_dir = "bdd/bdd100k/images/100k/{}".format(mode)
-    val_dir = "bdd/bdd100k/labels/100k/{}".format(mode)
-    out_dir = 'bdd_seg_gt/{}'.format(mode)
+    # image_dir = "bdd/bdd100k/images/100k/{}".format(mode)
+    # val_dir = "bdd/bdd100k/labels/100k/{}".format(mode)
+    # out_dir = 'bdd_seg_gt/{}'.format(mode)
+    image_dir = "/workspace/YOLOP/inference/test/img"
+    val_dir = "/workspace/YOLOP/inference/test/val"
+    out_dir = "/workspace/YOLOP/inference/test/out"
+    
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
     val_list = os.listdir(val_dir)
