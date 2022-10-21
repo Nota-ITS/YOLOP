@@ -229,10 +229,14 @@ class SegmentationMetric(object):
 
     def genConfusionMatrix(self, imgPredict, imgLabel):
         # remove classes from unlabeled pixels in gt image and predict
-        # print(imgLabel.shape)
         mask = (imgLabel >= 0) & (imgLabel < self.numClass)
         label = self.numClass * imgLabel[mask] + imgPredict[mask]
+        
+        # print((self.numClass * imgLabel[mask]).shape)
+        # print(imgLabel[mask].shape)
+
         count = np.bincount(label, minlength=self.numClass**2)
+        # print(count)
         confusionMatrix = count.reshape(self.numClass, self.numClass)
         return confusionMatrix
 

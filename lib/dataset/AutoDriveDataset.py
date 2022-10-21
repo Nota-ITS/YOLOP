@@ -260,5 +260,12 @@ class AutoDriveDataset(Dataset):
             label_det.append(l_det)
             label_seg.append(l_seg)
             label_lane.append(l_lane)
+        # 추가된 label이 어떤 형식인지
+        # print("detection : ", l_det.shape)
+        # print("seg : ", l_seg.shape)
+        # print("lane : ", l_lane.shape)
+        # print(len(label_det))
+        # print(len(label_seg))
+        # print(len(label_lane))
         return torch.stack(img, 0), [torch.cat(label_det, 0), torch.stack(label_seg, 0), torch.stack(label_lane, 0)], paths, shapes
 

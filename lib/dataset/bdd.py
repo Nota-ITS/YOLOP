@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 single_cls = True       # just detect vehicle
 
+# change to multiclass detect
 class BddDataset(AutoDriveDataset):
     def __init__(self, cfg, is_train, inputsize, transform=None):
         super().__init__(cfg, is_train, inputsize, transform)
