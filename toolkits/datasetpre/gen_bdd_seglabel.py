@@ -72,8 +72,8 @@ def main(mode="train"):
     # val_dir = "bdd/bdd100k/labels/100k/{}".format(mode)
     # out_dir = 'bdd_seg_gt/{}'.format(mode)
     image_dir = "/workspace/YOLOP/inference/test/img"
-    val_dir = "/workspace/YOLOP/inference/test/val"
-    out_dir = "/workspace/YOLOP/inference/test/out"
+    val_dir = "/workspace/YOLOP/dataset/det_annotations/val"
+    out_dir = "/workspace/YOLOP/dataset/da_seg_annotations/val"
     
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
