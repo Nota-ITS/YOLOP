@@ -6,6 +6,7 @@ __pycache__/
 bdd/
 runs/
 /dataset
+/dataset_old
 *.pth
 *.pt
 *.tar
