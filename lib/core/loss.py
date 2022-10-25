@@ -85,6 +85,10 @@ class MultiHeadLoss(nn.Module):
         # det_head1, det_head2, det_head3
         for i, pi in enumerate(predictions[0]):  # layer index, layer predictions
             b, a, gj, gi = indices[i]  # image, anchor, gridy, gridx
+            # print('b', b)
+            # print('a', a)
+            # print('gj', gj)
+            # print('gi', gi)
             tobj = torch.zeros_like(pi[..., 0], device=device)  # target obj
 
             n = b.shape[0]  # number of targets

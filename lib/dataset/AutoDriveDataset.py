@@ -186,6 +186,7 @@ class AutoDriveDataset(Dataset):
                 labels[:, [2, 4]] /= img.shape[0]  # height
                 labels[:, [1, 3]] /= img.shape[1]  # width
 
+        # 이 부분도 수정 필요?
         labels_out = torch.zeros((len(labels), 6))
         if len(labels):
             labels_out[:, 1:] = torch.from_numpy(labels)

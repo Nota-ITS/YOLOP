@@ -26,7 +26,7 @@ def build_targets(cfg, predictions, targets, model):
     # det = model.model[model.detector_index]
     # print(type(det))
     na, nt = det.na, targets.shape[0]  # number of anchors, targets
-    print("number of anchors, targets : " na, nt)
+    print("number of anchors, targets : ", na, nt)
     
     tcls, tbox, indices, anch = [], [], [], []
     gain = torch.ones(7, device=targets.device)  # normalized to gridspace gain
