@@ -505,7 +505,7 @@ class MCnet(nn.Module):
     def __init__(self, block_cfg, **kwargs):
         super(MCnet, self).__init__()
         layers, save= [], []
-        self.nc = 1
+        self.nc = 13
         self.detector_index = -1
         self.det_out_idx = block_cfg[0][0]
         self.seg_out_idx = block_cfg[0][1:]
@@ -585,6 +585,7 @@ if __name__ == "__main__":
     model = get_net(False)
     input_ = torch.randn((1, 3, 256, 256))
     gt_ = torch.rand((1, 2, 256, 256))
+    # binary class segmentation
     metric = SegmentationMetric(2)
     model_out,SAD_out = model(input_)
     detects, dring_area_seg, lane_line_seg = model_out

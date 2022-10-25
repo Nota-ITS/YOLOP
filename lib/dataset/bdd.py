@@ -5,7 +5,7 @@ from .AutoDriveDataset import AutoDriveDataset
 from .convert import convert, id_dict, id_dict_single
 from tqdm import tqdm
 
-single_cls = True       # just detect vehicle
+single_cls = False       # just detect vehicle
 
 # change to multiclass detect
 class BddDataset(AutoDriveDataset):
@@ -52,7 +52,7 @@ class BddDataset(AutoDriveDataset):
                     y2 = float(obj['box2d']['y2'])
                     cls_id = id_dict[category]
                     if single_cls:
-                         cls_id=0
+                        cls_id=0
                     gt[idx][0] = cls_id
                     box = convert((width, height), (x1, x2, y1, y2))
                     gt[idx][1:] = list(box)

@@ -25,9 +25,10 @@ from scipy.cluster.vq import kmeans
 from scipy.signal import butter, filtfilt
 from tqdm import tqdm
 
-
+# box range error?
 def bbox_iou(box1, box2, x1y1x2y2=True, GIoU=False, DIoU=False, CIoU=False, eps=1e-9):
     # Returns the IoU of box1 to box2. box1 is 4, box2 is nx4
+    # box1 = prediction, box2 = target
     box2 = box2.T
 
     # Get the coordinates of bounding boxes
@@ -43,13 +44,19 @@ def bbox_iou(box1, box2, x1y1x2y2=True, GIoU=False, DIoU=False, CIoU=False, eps=
     # Intersection area
     inter = (torch.min(b1_x2, b2_x2) - torch.max(b1_x1, b2_x1)).clamp(0) * \
             (torch.min(b1_y2, b2_y2) - torch.max(b1_y1, b2_y1)).clamp(0)
-
+    # inter = (torch.max(b1_x1, b2_x1) - torch.min(b1_x2, b2_x2)).clamp(0) * \
+    #         (torch.max(b1_y1, b2_y1) - torch.min(b1_y2, b2_y2)).clamp(0)
+    
     # Union Area
+    print('b1_x2:',b1_x2.shape)
+    print('b1_x1:',b1_x1.shape)
+    
     w1, h1 = b1_x2 - b1_x1, b1_y2 - b1_y1 + eps
     w2, h2 = b2_x2 - b2_x1, b2_y2 - b2_y1 + eps
     union = w1 * h1 + w2 * h2 - inter + eps
 
     iou = inter / union
+    print('iou shape : ', iou.shape)
     if GIoU or DIoU or CIoU:
         cw = torch.max(b1_x2, b2_x2) - torch.min(b1_x1, b2_x1)  # convex (smallest enclosing box) width
         ch = torch.max(b1_y2, b2_y2) - torch.min(b1_y1, b2_y1)  # convex height

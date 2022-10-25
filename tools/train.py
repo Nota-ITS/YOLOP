@@ -250,8 +250,9 @@ def main():
 
     # assign model params
     model.gr = 1.0
-    model.nc = 1
+    model.nc = 13
     # print('bulid model finished')
+    print("tools/train.py line 255, model.nc : ",model.nc)
 
     # Data loading
     print("begin to load data")

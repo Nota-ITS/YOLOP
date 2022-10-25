@@ -68,7 +68,7 @@ class MultiHeadLoss(nn.Module):
         device = targets[0].device
         lcls, lbox, lobj = torch.zeros(1, device=device), torch.zeros(1, device=device), torch.zeros(1, device=device)
         tcls, tbox, indices, anchors = build_targets(cfg, predictions[0], targets[0], model)  # targets
-
+        
         # Class label smoothing https://arxiv.org/pdf/1902.04103.pdf eqn 3
         cp, cn = smooth_BCE(eps=0.0)
 
@@ -77,9 +77,12 @@ class MultiHeadLoss(nn.Module):
         # Calculate Losses
         nt = 0  # number of targets
         no = len(predictions[0])  # number of outputs
+        # print('number of outputs : ', no)
         balance = [4.0, 1.0, 0.4] if no == 3 else [4.0, 1.0, 0.4, 0.1]  # P3-5 or P3-6
 
         # calculate detection loss
+        # pi = multi scale feature map output,
+        # det_head1, det_head2, det_head3
         for i, pi in enumerate(predictions[0]):  # layer index, layer predictions
             b, a, gj, gi = indices[i]  # image, anchor, gridy, gridx
             tobj = torch.zeros_like(pi[..., 0], device=device)  # target obj

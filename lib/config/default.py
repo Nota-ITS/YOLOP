@@ -93,7 +93,7 @@ _C.TRAIN.BEGIN_EPOCH = 0
 _C.TRAIN.END_EPOCH = 240            # run 할 때 몇 epoch 으로 할 지 설정 가능하도록 환경변수로 빼기
 
 _C.TRAIN.VAL_FREQ = 1
-_C.TRAIN.BATCH_SIZE_PER_GPU =8     # batch size 8로 수정
+_C.TRAIN.BATCH_SIZE_PER_GPU = 4     # batch size 8로 수정
 _C.TRAIN.SHUFFLE = True
 
 _C.TRAIN.IOU_THRESHOLD = 0.2

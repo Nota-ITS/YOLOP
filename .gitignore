@@ -5,9 +5,14 @@ __pycache__/
 .vscode/
 bdd/
 runs/
+/dataset_nota
 /dataset
 /dataset_old
 *.pth
 *.pt
 *.tar
 *.tar.gz
+/inference/nota
+/inference/output
+/inference/unseen
+

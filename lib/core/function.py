@@ -146,7 +146,7 @@ def validate(epoch,config, val_loader, val_dataset, model, criterion, output_dir
     save_hybrid=False
     log_imgs,wandb = min(16,100), None
 
-    nc = 1
+    nc = 13
     iouv = torch.linspace(0.5,0.95,10).to(device)     #iou vector for mAP@0.5:0.95
     niou = iouv.numel()
 
@@ -158,6 +158,7 @@ def validate(epoch,config, val_loader, val_dataset, model, criterion, output_dir
 
     seen =  0 
     confusion_matrix = ConfusionMatrix(nc=model.nc) #detector confusion matrix
+    print("model.nc : ",model.nc)
     da_metric = SegmentationMetric(config.num_seg_class) #segment confusion matrix    
     ll_metric = SegmentationMetric(2) #segment confusion matrix
 

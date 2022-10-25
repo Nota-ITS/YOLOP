@@ -11,6 +11,7 @@
 # 'caravan': 36, 'motorcycle': 37, 'trailer': 38, 'train': 39,
 # 'truck': 40       
 # }
+# nc : 13
 id_dict = {'person': 0, 'rider': 1, 'car': 2, 'bus': 3, 'truck': 4, 
 'bike': 5, 'motor': 6, 'tl_green': 7, 'tl_red': 8, 
 'tl_yellow': 9, 'tl_none': 10, 'traffic sign': 11, 'train': 12}

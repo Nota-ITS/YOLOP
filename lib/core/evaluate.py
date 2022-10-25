@@ -112,6 +112,7 @@ class ConfusionMatrix:
         self.nc = nc  # number of classes
         self.conf = conf
         self.iou_thres = iou_thres
+        print(nc)
 
     def process_batch(self, detections, labels):
         """
@@ -199,7 +200,7 @@ class SegmentationMetric(object):
         Acc = np.diag(self.confusionMatrix) / (self.confusionMatrix.sum(axis=1) + 1e-12)
         return Acc[1]
 
-    def classPixelAccuracy(self):
+    def classPixelAccuracy(self): # precision
         # return each category pixel accuracy(A more accurate way to call it precision)
         # acc = (TP) / TP + FP
         classAcc = np.diag(self.confusionMatrix) / (self.confusionMatrix.sum(axis=0) + 1e-12)
@@ -256,10 +257,6 @@ class SegmentationMetric(object):
 
     def reset(self):
         self.confusionMatrix = np.zeros((self.numClass, self.numClass))
-
-
-
-
 
 # Plots ----------------------------------------------------------------------------------------------------------------
 
